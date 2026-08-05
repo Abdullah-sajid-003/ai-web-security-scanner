@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.api.routes import auth
+from app.api.routes import auth, scans, targets
 from app.core.config import settings
 
 app = FastAPI(
@@ -16,3 +16,5 @@ def health_check():
 
 
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
+app.include_router(targets.router, prefix="/targets", tags=["targets"])
+app.include_router(scans.router, tags=["scans"])
