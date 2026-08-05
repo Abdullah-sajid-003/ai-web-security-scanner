@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+
+from app.api.routes import auth
 from app.core.config import settings
 
 app = FastAPI(
@@ -7,6 +9,10 @@ app = FastAPI(
     version="0.1.0",
 )
 
+
 @app.get("/health")
 def health_check():
     return {"status": "ok", "environment": settings.APP_ENV}
+
+
+app.include_router(auth.router, prefix="/auth", tags=["auth"])
